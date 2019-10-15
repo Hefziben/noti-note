@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +18,8 @@
     "mongoose": "^5.7.5",
     "nodemon": "^1.19.3",
     "sulla": "^1.1.1"
+  },
+  "engines": {
+    "node": "10.16.0"
   }
 }

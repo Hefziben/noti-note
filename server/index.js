@@ -11,7 +11,7 @@ require('dotenv').config()
 // import CORS
 const cors = require('cors');
 // check computer environment port number
-const port = process.env.port || 3002;
+const port = process.env.PORT || 3002;
 // To parse a boydy to json
 var bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded

@@ -10,6 +10,6 @@ mongoose.connect(db_url, { useNewUrlParser: true, useUnifiedTopology: true }, er
   if (!err) {
     console.log("Conexion exitosa a MongoDB!!");
   } else {
-    console.log('algo estas mal con la base de datos');
+    console.log('Something bad happen with database');
   }
 });

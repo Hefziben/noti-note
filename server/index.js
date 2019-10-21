@@ -28,8 +28,6 @@ const sulla = require('sulla');
 
 //make calls 
 miInfo = '';
-let myUser = any;
-let confirmation = Boolean;
 const Order = require('../modelos/order')
 
 
@@ -43,26 +41,19 @@ app.get('/', (req, res)=>{
 })
 
 sulla.create().then(client => {
-  confirmation = false;
     start(client);
-    send(client);
    // getOrders();
     this.myInfo = client;
-    myUser = client;
-    
     
         
 
 } );
 
-function start(client) {    
+function start(client) {  
   client.onMessage(message => {
     console.log(message.from);
     if (message.body === 'A') {
-      client.sendText('50762673437@c.us', 'hello');
-    
-      
-      
+      client.sendText('50762673437@c.us', goodText);
     }
   });
 }
@@ -86,7 +77,6 @@ app.get('/', (req, res)=>{
   res.send('Hello World');
 })
         app.post("/api/v1/order", (req, res) => {
-          var self = this;
           const nuevaOrden = req.body;
           const ordenNueva = new Order(nuevaOrden);
           ordenNueva.save((err, ordenNueva) => {
@@ -126,19 +116,16 @@ app.get('/', (req, res)=>{
                     \n\n*En breve estaremos en contacto contigo.*`;
                       //const clienteWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
                       const clienteWhatsapp = `50762673437@c.us`;
-                      myUser.sendText(clienteWhatsapp, mensaje).then(res => {
-                        console.log(res);
-                        console.log(mensaje);
-                        console.log(clienteWhatsapp);
-                      });
-                      
+                      this.myInfo.sendText(clienteWhatsapp, mensaje);
+                      console.log(mensaje);
+                      console.log(clienteWhatsapp);
                       
                     } else{
                         console.log('orden no existe');
                         
                     }
                   }
-                })
+                });
 
               res.send({ message: "Orden guardada", res: ordenNueva });
             }

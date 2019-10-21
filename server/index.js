@@ -28,6 +28,7 @@ const sulla = require('sulla');
 
 //make calls 
 miInfo = '';
+let confirmation = Boolean;
 const Order = require('../modelos/order')
 
 
@@ -41,9 +42,12 @@ app.get('/', (req, res)=>{
 })
 
 sulla.create().then(client => {
+  confirmation = false;
     start(client);
+    send(client);
    // getOrders();
     this.myInfo = client;
+    
     
         
 
@@ -58,6 +62,14 @@ function start(client) {
       
     }
   });
+}
+function send(client, user, message) {
+  if (confirmation == true) {
+    console.log("hay nueva orden");
+    client.sendText(user, message);
+  } else {
+    console.log("no hay nueva orden");
+  }
 }
 
 //wocommerce API
@@ -118,12 +130,16 @@ app.get('/', (req, res)=>{
                     \n\n*En breve estaremos en contacto contigo.*`;
                       //const clienteWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
                       const clienteWhatsapp = `50762673437@c.us`;
-                      this.myInfo.sendText(clienteWhatsapp, mensaje).then(res => {
-                        
+                      send(clienteWhatsapp,mensaje).the(res => {
                         console.log(res);
-                        console.log(mensaje);
-                      console.log(clienteWhatsapp);                        
-                      });
+                        
+                      })
+                      // this.myInfo.sendText(clienteWhatsapp, mensaje).then(res => {
+                        
+                      //   console.log(res);
+                      //   console.log(mensaje);
+                      // console.log(clienteWhatsapp);                        
+                      // });
                       
                     } else{
                         console.log('orden no existe');

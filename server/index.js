@@ -53,7 +53,7 @@ function start(client) {
   client.onMessage(message => {
     console.log(message.from);
     if (message.body === 'A') {
-      client.sendText('50762673437@c.us', goodText);
+      client.sendText('50762673437@c.us', 'hello');
     }
   });
 }

@@ -99,7 +99,7 @@ app.get('/', (req, res)=>{
                     if (newItem == items.number) {
                       let myNewOrder = items;
                       console.log("se proceso una nueva orden señor");
-                      console.log(myNewOrder);
+                      //console.log(myNewOrder);
                       const mensaje = `** *FAJAS DE YESO BELLA MIA* **
                     \n  Hola *${myNewOrder.billing.first_name}*, 
                     \n¡Gracias por confiar en nosotros!
@@ -114,10 +114,12 @@ app.get('/', (req, res)=>{
                     \n ${myNewOrder.billing.state} ${myNewOrder.billing.country} 
                     \n*Metodo de Pago:* Pago en la entrega
                     \n\n*En breve estaremos en contacto contigo.*`;
-                      const clienteWhatsapp = `507${myNewOrder.telefono}@c.us`;
+                      const clienteWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
                       //const clienteWhatsapp = `50762673437@c.us`;
                       this.myInfo.sendText(clienteWhatsapp, mensaje);
                       console.log(mensaje);
+                      console.log(clienteWhatsapp);
+                      
                     } else{
                         console.log('orden no existe');
                         

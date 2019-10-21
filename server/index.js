@@ -114,8 +114,8 @@ app.get('/', (req, res)=>{
                     \n ${myNewOrder.billing.state} ${myNewOrder.billing.country} 
                     \n*Metodo de Pago:* Pago en la entrega
                     \n\n*En breve estaremos en contacto contigo.*`;
-                      //const clienteWhatsapp = `507${myNewOrder.telefono}@c.us`;
-                      const clienteWhatsapp = `50762673437@c.us`;
+                      const clienteWhatsapp = `507${myNewOrder.telefono}@c.us`;
+                      //const clienteWhatsapp = `50762673437@c.us`;
                       this.myInfo.sendText(clienteWhatsapp, mensaje);
                       console.log(mensaje);
                     } else{

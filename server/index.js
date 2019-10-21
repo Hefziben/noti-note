@@ -130,6 +130,7 @@ app.get('/', (req, res)=>{
                     \n\n*En breve estaremos en contacto contigo.*`;
                       //const clienteWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
                       const clienteWhatsapp = `50762673437@c.us`;
+                      confirmation = true;
                       send(clienteWhatsapp,mensaje).the(res => {
                         console.log(res);
                         

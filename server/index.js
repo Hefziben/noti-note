@@ -53,7 +53,9 @@ function start(client) {
   client.onMessage(message => {
     console.log(message.from);
     if (message.body === 'A') {
-      client.sendText('50762673437@c.us', goodText);
+      client.sendText('50762673437@c.us', 'hello');
+      
+      
     }
   });
 }
@@ -116,18 +118,20 @@ app.get('/', (req, res)=>{
                     \n\n*En breve estaremos en contacto contigo.*`;
                       //const clienteWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
                       const clienteWhatsapp = `50762673437@c.us`;
-                      this.myInfo.sendText(clienteWhatsapp, mensaje).then(res =>{
-                        console.log(res);
+                      this.myInfo.sendText(clienteWhatsapp, mensaje).then(res => {
                         
+                        console.log(res);
+                        console.log(mensaje);
+                      console.log(clienteWhatsapp);                        
                       });
-                      console.log(mensaje);
-                      console.log(clienteWhatsapp);
                       
                     } else{
                         console.log('orden no existe');
                         
                     }
                   }
+                }).the(()=>{
+                  
                 });
 
               res.send({ message: "Orden guardada", res: ordenNueva });

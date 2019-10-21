@@ -147,9 +147,7 @@ app.get('/', (req, res)=>{
                         
                     }
                   }
-                }).the(()=>{
-                  
-                });
+                })
 
               res.send({ message: "Orden guardada", res: ordenNueva });
             }

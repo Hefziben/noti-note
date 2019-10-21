@@ -98,8 +98,7 @@ app.get('/', (req, res)=>{
                   for (let items of newo) {
                     if (newItem == items.number) {
                       let myNewOrder = items;
-                      console.log("se proceso una nueva orden señor");
-                      //console.log(myNewOrder);
+                      console.log("se proceso una nueva orden señor");                      
                       const mensaje = `** *FAJAS DE YESO BELLA MIA* **
                     \n  Hola *${myNewOrder.billing.first_name}*, 
                     \n¡Gracias por confiar en nosotros!

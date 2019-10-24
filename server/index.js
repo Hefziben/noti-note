@@ -78,43 +78,41 @@ app.get('/', (req, res)=>{
   res.send('Hello World');
 })
 
-app.get('/wakeUp', (req, res) =>{
-  const status = 'Alguine me desperto, vere que quiere';
- this.myInfo.sendText('50762673437@c.us', status);
- res.send('me desperte');
- if (res.status == 400) {
-  res.send({ mensaje: "error en el post", res: status, err });
-} else {
-  res.send('me desperte');
-  console.log('despierto');
-  
-}
+app.get("/wakeUp", (req, res) => {
+  const status = "Alguine me desperto, vere que quiere";
+  this.myInfo.sendText("50762673437@c.us", status);
+  if (res.status == 400) {
+    res.send({ mensaje: "error en el post", res: status, err });
+  } else {
+    res.send("me desperte");
+    console.log("despierto");
+  }
+});
 
-})
-        app.post("/api/v1/order", (req, res) => {
-          const nuevaOrden = req.body;
-          const ordenNueva = new Order(nuevaOrden);
-          ordenNueva.save((err, ordenNueva) => {
-            if (res.status == 400) {
-              res.send({ mensaje: "error en el post", res: ordenNueva, err });
-            } else {
-              ///get the new order# from PWA
-              let newItem = ordenNueva.number;
-              console.log(newItem);
+app.post("/api/v1/order", (req, res) => {
+  const nuevaOrden = req.body;
+  const ordenNueva = new Order(nuevaOrden);
+  ordenNueva.save((err, ordenNueva) => {
+    if (res.status == 400) {
+      res.send({ mensaje: "error en el post", res: ordenNueva, err });
+    } else {
+      ///get the new order# from PWA
+      let newItem = ordenNueva.number;
+      console.log(newItem);
 
-              ///get the orders from Woocommerce
-              axios
-                .get(
-                  `${process.env.WOOCOMMERCE_API_ENDPOINT}/wp-json/wc/v3/orders`,
-                  defaultHeaders
-                )
-                .then(data => {
-                  const newo = data.data;
-                  for (let items of newo) {
-                    if (newItem == items.number) {
-                      let myNewOrder = items;
-                      console.log("se proceso una nueva orden señor");                      
-                      const mensaje = `** *FAJAS DE YESO BELLA MIA* **
+      ///get the orders from Woocommerce
+      axios
+        .get(
+          `${process.env.WOOCOMMERCE_API_ENDPOINT}/wp-json/wc/v3/orders`,
+          defaultHeaders
+        )
+        .then(data => {
+          const newo = data.data;
+          for (let items of newo) {
+            if (newItem == items.number) {
+              let myNewOrder = items;
+              console.log("se proceso una nueva orden señor");
+              const mensaje = `** *FAJAS DE YESO BELLA MIA* **
                     \n  Hola *${myNewOrder.billing.first_name}*, 
                     \n¡Gracias por confiar en nosotros!
                     \nYa recibimos tu orden con ID: *${myNewOrder.number}* y vamos a procesarlo de inmediato. 
@@ -128,22 +126,21 @@ app.get('/wakeUp', (req, res) =>{
                     \n ${myNewOrder.billing.state} ${myNewOrder.billing.country} 
                     \n*Metodo de Pago:* Pago en la entrega
                     \n\n*En breve estaremos en contacto contigo.*`;
-                      const clientWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
-                      //const clienteWhatsapp = `50762673437@c.us`;
-                      this.myInfo.sendText(clienteWhatsapp, mensaje);
-                      console.log(mensaje);
-                      console.log(clienteWhatsapp);
-                      console.log(clientWhatsapp);
-                      
-                    } else{
-                        console.log('orden no existe');
-                        
-                    }
-                  }
-                });
-
-              res.send({ message: "Orden guardada", res: ordenNueva });
+              const clientWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
+              //const clienteWhatsapp = `50762673437@c.us`;
+              this.myInfo.sendText(clienteWhatsapp, mensaje);
+              console.log(mensaje);
+              console.log(clienteWhatsapp);
+              console.log(clientWhatsapp);
+            } else {
+              console.log("orden no existe");
             }
-          });
-        });  
+          }
+        });
+
+      res.send({ message: "Orden guardada", res: ordenNueva });
+    }
+  });
+});  
+
 module.exports = {app, port}

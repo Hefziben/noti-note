@@ -44,6 +44,7 @@ sulla.create().then(client => {
     start(client);
    // getOrders();
     this.myInfo = client;
+
     
         
 
@@ -75,6 +76,20 @@ let defaultHeaders = {
 
 app.get('/', (req, res)=>{
   res.send('Hello World');
+})
+
+app.get('/wakeUp', (req, res) =>{
+  const status = 'Alguine me desperto, vere que quiere';
+ this.myInfo.sendText('50762673437@c.us', status);
+ res.send('me desperte');
+ if (res.status == 400) {
+  res.send({ mensaje: "error en el post", res: status, err });
+} else {
+  res.send('me desperte');
+  console.log('despierto');
+  
+}
+
 })
         app.post("/api/v1/order", (req, res) => {
           const nuevaOrden = req.body;
@@ -114,7 +129,7 @@ app.get('/', (req, res)=>{
                     \n*Metodo de Pago:* Pago en la entrega
                     \n\n*En breve estaremos en contacto contigo.*`;
                       const clientWhatsapp = `507${myNewOrder.billing.phone}@c.us`;
-                      const clienteWhatsapp = `50762673437@c.us`;
+                      //const clienteWhatsapp = `50762673437@c.us`;
                       this.myInfo.sendText(clienteWhatsapp, mensaje);
                       console.log(mensaje);
                       console.log(clienteWhatsapp);

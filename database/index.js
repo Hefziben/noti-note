@@ -1,6 +1,7 @@
 // Mongoose
 const mongoose = require("mongoose");
 require('dotenv').config()
+mongoose.set('useFindAndModify', false);
 
 // Conectar mongoose con MongoDB
 const db_url = process.env.URI

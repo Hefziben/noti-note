@@ -28,7 +28,11 @@ const sulla = require('sulla');
 
 //make calls 
 miInfo = '';
-const Order = require('../modelos/order')
+let tarea;
+let whatsaap;
+const Order = require('../modelos/order');
+const Contacto = require('../modelos/contact');
+const Tarea = require('../modelos/tarea');
 
 
 
@@ -44,20 +48,149 @@ sulla.create().then(client => {
     start(client);
    // getOrders();
     this.myInfo = client;
-
-    
-        
-
+    whatsaap = client;
 } );
 
+
+// start sample
 function start(client) {  
+  var contacts = [{
+    number: '50767114371'
+  }, {
+    number: '50767676199'
+  }  
+];
   client.onMessage(message => {
     console.log(message.from);
     if (message.body === 'A') {
-      client.sendText('50762673437@c.us', 'hello');
+      for (let i = 0; i < contacts.length; i++) {
+        const item = contacts[i].number + '@c.us';
+        console.log(item);
+        client.sendText(item,'hello'); 
+      }
+      
     }
   });
 }
+
+//crear un nuevo contacto
+app.post('/nuevoContacto', (req, res)=>{
+  const nuevoContacto = req.body
+  console.log(nuevoContacto);    
+  const crearContacto = new Contacto(nuevoContacto);
+  crearContacto.save((err, crearContacto)=>{
+    if(res.status == 400) {
+      res.send({ mensaje: "error en el post", res: status, err });
+    } else {
+      res.send({ mensaje: "Contacto guardado con exito", res: crearContacto, err });
+    }
+  } )
+})
+
+//traer contactos
+app.get("/contactos", (req, res) => {
+ 	Contacto.find({}, (err, contactos) =>{
+    if(res.status == 400) {
+      res.send({ mensaje: "error en el get", res: status, err });
+    } else {
+      res.send({ mensaje: "peticion existosa", datos: contactos });
+      // for (let i = 0; i < contactos.length; i++) {
+      //   const element = contactos[i].nombre;
+      //   console.log('soy ' + element);
+      // }
+    }
+       
+    });
+});
+
+//traer contactto por ID
+app.get('/contacto/:id', (req, res)=>{
+  contactoId = req.params.id;
+  Contacto.findById(contactoId)
+           .exec()
+           .then(datos => 
+              res.status(200).send(datos))
+              .catch(err => res.status(400).send(err));
+})
+
+//Actualizar contacto
+app.put('/contacto/:id', (req, res)=>{
+  const contactoId = req.params.id;
+  Contacto.findByIdAndUpdate(contactoId,
+      {$set:req.body}, {new:true})
+      .then(datos => res.status(200).send(datos))
+.catch(err => res.status(400).send(err));
+});
+
+ //borrar contacto
+ app.delete('/contacto/:id', (req, res)=>{
+  const contactoId = req.params.id;
+  Contacto.findByIdAndDelete(contactoId)
+      .then(datos => res.status(200).send(datos))
+.catch(err => res.status(400).send(err));
+});
+
+// **** Crear tareas ***//
+
+//crear tarea con mensaje
+app.post('/nuevaTarea', (req, res)=>{
+  const nuevaTarea = req.body
+  console.log(nuevaTarea);    
+  const crearTarea = new Tarea(nuevaTarea);
+  crearTarea.save((err, crearTarea)=>{
+    if(res.status == 400) {
+      res.send({ mensaje: "error en el post", res: status, err });
+    } else {
+      res.send({ mensaje: "Tarea guardado con exito", res: crearTarea, err });
+    }
+  } )
+})
+
+//buscar tareas
+app.get("/tareas", (req, res) => {
+  Tarea.find({}, (err, tareas) =>{
+   if(res.status == 400) {
+     res.send({ mensaje: "error en el get", res: status, err });
+   } else {
+     res.send({ mensaje: "peticion existosa", res: tareas, err });
+    
+   }
+      
+   });
+});
+
+//Actualizar tarea
+app.put('/tarea/:id', (req, res)=>{
+  const tareaId = req.params.id;
+  Tarea.findByIdAndUpdate(tareaId,
+      {$set:req.body}, {new:true})
+      .then(datos => {
+        tarea = datos;
+        res.status(200).send(datos)
+          //console.log(datos); 
+      }).then(()=>{
+        axios.get('http://localhost:3002/contactos').then(data =>{
+          const contactos = data.data.datos;
+          for (let i = 0; i < contactos.length; i++) {
+            const cliente = contactos[i];  
+            const telefono = `507${cliente.telefono}@c.us`
+          const mensaje = `Hola ${cliente.nombre},\n${tarea.mensaje} a tu numero ${cliente.telefono} para la campaña de whatsapp Marketing.\nAtt: Raynier 👋`          
+            console.log(mensaje);
+            whatsaap.sendText(telefono,mensaje);            
+          }
+          
+        })
+      })
+.catch(err => res.status(400).send(err));
+});
+
+ //borrar tarea
+ app.delete('/tarea/:id', (req, res)=>{
+  const tareaId = req.params.id;
+  Tarea.findByIdAndDelete(tareaId)
+      .then(datos => res.status(200).send({ mensaje: "Tarea borrada con exito" }))
+.catch(err => res.status(400).send({ mensaje: "Error al borrar tarea", res:err }));
+});
 
 //wocommerce API
 let defaultHeaders = {
@@ -88,6 +221,7 @@ app.get("/wakeUp", (req, res) => {
     console.log("despierto");
   }
 });
+
 
 app.post("/api/v1/order", (req, res) => {
           const nuevaOrden = req.body;
@@ -131,7 +265,6 @@ app.post("/api/v1/order", (req, res) => {
                       this.myInfo.sendText(clienteWhatsapp, mensaje);
                       console.log(mensaje);
                       console.log(clienteWhatsapp);
-                      console.log(clientWhatsapp);
                     } else {
                       console.log("orden no existe");
                     }

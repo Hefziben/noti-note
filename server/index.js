@@ -169,7 +169,7 @@ app.put('/tarea/:id', (req, res)=>{
         res.status(200).send(datos)
           //console.log(datos); 
       }).then(()=>{
-        axios.get('http://localhost:3002/contactos').then(data =>{
+        axios.get('https://whatnotif.herokuapp.com/contactos').then(data =>{
           const contactos = data.data.datos;
           for (let i = 0; i < contactos.length; i++) {
             const cliente = contactos[i];  

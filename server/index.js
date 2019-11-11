@@ -167,19 +167,21 @@ app.put('/tarea/:id', (req, res)=>{
       .then(datos => {
         tarea = datos;
         res.status(200).send(datos)
-          //console.log(datos); 
+          console.log(datos); 
       }).then(()=>{
-        axios.get('https://whatnotif.herokuapp.com/contactos').then(data =>{
-          const contactos = data.data.datos;
-          for (let i = 0; i < contactos.length; i++) {
-            const cliente = contactos[i];  
-            const telefono = `507${cliente.telefono}@c.us`
-          const mensaje = `Hola ${cliente.nombre},\n${tarea.mensaje} a tu numero ${cliente.telefono} para la campaña de whatsapp Marketing.\nAtt: Raynier 👋`          
-            console.log(mensaje);
-            whatsaap.sendText(telefono,mensaje);            
-          }
-          
-        })
+        if(tarea.estado == "enviado"){
+          axios.get('https://whatnotif.herokuapp.com/contactos').then(data =>{
+            const contactos = data.data.datos;
+            for (let i = 0; i < contactos.length; i++) {
+              const cliente = contactos[i];  
+              const telefono = `507${cliente.telefono}@c.us`
+            const mensaje = `Hola ${cliente.nombre},\n${tarea.mensaje} a tu numero ${cliente.telefono} para la campaña de whatsapp Marketing.\nAtt: Raynier 👋`          
+              console.log(contactos);
+              whatsaap.sendText(telefono,mensaje); 
+              }
+            
+          })
+        } 
       })
 .catch(err => res.status(400).send(err));
 });

@@ -4,8 +4,9 @@ const Schema  = mongoose.Schema;
 const tareaSchema = new Schema({
       nombre: { type: String },
       mensaje: { type: String },
-      telefono: { type: String },
-      estado: { type: String }, //creada, enviada
+      vendor: { type: String },
+      estado: { type: String }, //creado, enviado, actualizado
+      fecha: {type: Date}
 });
 
 const Tarea = mongoose.model('Tarea', tareaSchema)

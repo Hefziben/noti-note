@@ -1,11 +1,22 @@
-2019/11/27-13:56:05.521 4530 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2019/11/27-13:56:05.521 4530 Recovering log #61
-2019/11/27-13:56:05.863 4530 Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000061.log 
-2019/11/27-13:56:15.991 253c Level-0 table #67: started
-2019/11/27-13:56:16.093 253c Level-0 table #67: 1084516 bytes OK
-2019/11/27-13:56:16.109 253c Delete type=0 #61
-2019/11/27-13:56:17.225 253c Compacting 1@1 + 2@2 files
-2019/11/27-13:56:17.471 253c Generated table #68@1: 40708 keys, 2238767 bytes
-2019/11/27-13:56:17.620 253c Generated table #69@1: 25068 keys, 916912 bytes
-2019/11/27-13:56:17.620 253c Compacted 1@1 + 2@2 files => 3155679 bytes
-2019/11/27-13:56:17.624 253c compacted to: files[ 0 0 2 0 0 0 0 ]
+2019/11/27-14:29:46.155 1e98 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2019/11/27-14:29:46.155 1e98 Recovering log #81
+2019/11/27-14:29:46.496 1e98 Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000081.log 
+2019/11/27-14:29:56.714 23a0 Compacting 1@1 + 2@2 files
+2019/11/27-14:29:56.967 23a0 Generated table #83@1: 40624 keys, 2237870 bytes
+2019/11/27-14:29:57.065 23a0 Generated table #84@1: 25597 keys, 939863 bytes
+2019/11/27-14:29:57.065 23a0 Compacted 1@1 + 2@2 files => 3177733 bytes
+2019/11/27-14:29:57.073 23a0 compacted to: files[ 0 0 2 0 0 0 0 ]
+2019/11/27-14:29:57.074 23a0 Delete type=2 #68
+2019/11/27-14:29:57.074 23a0 Delete type=2 #69
+2019/11/27-14:29:57.074 23a0 Delete type=2 #71
+2019/11/27-14:30:02.839 23a0 Level-0 table #86: started
+2019/11/27-14:30:02.910 23a0 Level-0 table #86: 1306055 bytes OK
+2019/11/27-14:30:02.917 23a0 Delete type=0 #81
+2019/11/27-14:30:17.654 23a0 Compacting 1@1 + 2@2 files
+2019/11/27-14:30:17.871 23a0 Generated table #87@1: 38288 keys, 2234674 bytes
+2019/11/27-14:30:17.982 23a0 Generated table #88@1: 31234 keys, 1262288 bytes
+2019/11/27-14:30:17.983 23a0 Compacted 1@1 + 2@2 files => 3496962 bytes
+2019/11/27-14:30:17.986 23a0 compacted to: files[ 0 0 2 0 0 0 0 ]
+2019/11/27-14:30:17.986 23a0 Delete type=2 #83
+2019/11/27-14:30:17.986 23a0 Delete type=2 #84
+2019/11/27-14:30:17.986 23a0 Delete type=2 #86

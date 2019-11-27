@@ -1,3 +1,13 @@
-2019/11/26-21:51:59.582 3e88 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2019/11/26-21:51:59.583 3e88 Recovering log #61
-2019/11/26-21:51:59.909 3e88 Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000061.log 
+2019/11/27-14:29:39.204 4658 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2019/11/27-14:29:39.211 4658 Recovering log #66
+2019/11/27-14:29:39.258 4658 Level-0 table #71: started
+2019/11/27-14:29:39.288 4658 Level-0 table #71: 92527 bytes OK
+2019/11/27-14:29:39.288 4658 Recovering log #81
+2019/11/27-14:29:40.041 4658 Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000081.log 
+2019/11/27-14:29:40.049 4658 Delete type=2 #63
+2019/11/27-14:29:40.049 4658 Delete type=2 #64
+2019/11/27-14:29:40.049 4658 Delete type=0 #66
+2019/11/27-14:29:40.049 4658 Delete type=2 #67
+2019/11/27-14:29:40.049 4658 Delete type=2 #83
+2019/11/27-14:29:40.049 4658 Delete type=2 #84
+2019/11/27-14:29:40.184 107c Moved #71 to level-1 92527 bytes OK: files[ 0 1 2 0 0 0 0 ]

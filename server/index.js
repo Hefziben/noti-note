@@ -25,64 +25,182 @@ app.use(cors());
 
 //sulla
 const sulla = require('sulla');
+const Order = require('../modelos/order');
+const Contacto = require('../modelos/contact');
+const Tarea = require('../modelos/tarea');
 
 //make calls 
 miInfo = '';
 let tarea;
 let whatsaap;
-const Order = require('../modelos/order');
-const Contacto = require('../modelos/contact');
-const Tarea = require('../modelos/tarea');
+let apiDev = 'http://localhost:3002'
+let apiProd = 'https://whatnotif.herokuapp.com'
+let categoriaId = [];
 
-
-
-
+const bienvenida = 
+  `Que bueno que te animaste a ser parte de whatsy Marketing Panamá. Para comenzar a recibir promocienes envía la frase inicial de la(s) categoría(s) de tu preferencia separadas conun espaco:
+\nAutomotriz: *au*    -  Cursos: *cu*
+Restaurantes: *re*  - Eventos: *ev*
+Salones y Spa: *ss* - Hoteles: *ho*
+Medicina: *me*      - Moda: *mo*
+Productos: *pr*     - Servicios: *se*`
 
 ///Whatsaap bot
 
 app.get('/', (req, res)=>{
     res.send('Hello World');
+
+   
 })
+
+// function sayHello() {
+//   const promo =  {nombre: 'pizza',
+//     categoria:'pr',
+//   mensaje: 'approvecha descuento'}
+//   console.log(promo.categoria);
+  
+  
+//   axios.get(`${apiDev}/contactos`).then( data => {     
+//     const contactos = data.data.datos;    
+//     for (let contacto of contactos ) {
+//       console.log(contacto.categorias);      
+//       const categoriaExiste = RegExp(promo.categoria, 'i').test(contacto.categorias);
+//       //console.log(categoriaExiste);
+//       if (categoriaExiste){
+//         console.log(contacto.nombre + ' incluye la caterogia '+ promo.categoria );       
+        
+        
+//       } 
+      
+//     }
+//   });
+   
+   
+// }
 
 sulla.create().then(client => {
     start(client);
    // getOrders();
-    this.myInfo = client;
+    myInfo = client;
     whatsaap = client;
 } );
 
 
-// start sample
-function start(client) {  
-  var contacts = [{
-    number: '50767114371'
-  }, {
-    number: '50767676199'
-  }  
-];
+//start sample
+function start(client) {
   client.onMessage(message => {
-    console.log(message.from);
-    if (message.body === 'A') {
-      for (let i = 0; i < contacts.length; i++) {
-        const item = contacts[i].number + '@c.us';
-        console.log(item);
-        client.sendText(item,'hello'); 
+    console.log(message.from);   
+    axios.get(`${apiDev}/contactos`).then(data => {
+      const contactos = data.data.datos;
+      for (let contacto of contactos) {
+        if (message.from == `507${contacto.telefono}@c.us`) {
+          const usuario = contacto;
+          //console.log(usuario);
+          const automotriz = RegExp('au', 'i').test(message.body);
+          const cursos = RegExp('cu', 'i').test(message.body);
+          const restaurantes= RegExp('re', 'i').test(message.body);
+          const eventos = RegExp('ev', 'i').test(message.body);
+          const salones_Spa = RegExp('ss', 'i').test(message.body);
+          const hoteles = RegExp('ho', 'i').test(message.body);
+          const medicina = RegExp('me', 'i').test(message.body);
+          const productos = RegExp('pr', 'i').test(message.body);
+          const servicios = RegExp('se', 'i').test(message.body);
+          if(automotriz){
+            usuario.categorias.push('au')
+            categoriaId.push('automotriz')
+          } if(cursos){
+             usuario.categorias.push('cu')
+             categoriaId.push('cursos')
+          } if(restaurantes){
+             usuario.categorias.push('re')
+             categoriaId.push('restaurantes')
+          } if(eventos){
+             usuario.categorias.push('ev')
+             categoriaId.push('eventos')
+          } if(salones_Spa){
+             usuario.categorias.push('ss')
+             categoriaId.push('salonos y spa')
+          } if(hoteles){
+             usuario.categorias.push('ho')
+             categoriaId.push('hoteles')
+          } if(medicina){
+             usuario.categorias.push('me')
+             categoriaId.push('medicina')
+          } if(productos){
+             usuario.categorias.push('pr')
+             categoriaId.push('productos')
+          } if(servicios){
+             usuario.categorias.push('se')
+             categoriaId.push('servicios')
+          }
+          
+          let datos = {
+            nombre: usuario.nombre,
+            apellido: usuario.apellido,
+            telefono:usuario.telefono,
+            categorias: usuario.categorias
+          }
+          console.log(categoriaId);
+          console.log(usuario._id);
+          
+          axios.put(`${apiDev}/contacto/${usuario._id}`, datos).then( data =>{
+            console.log(data.data);
+             
+          })
+          
+          return
+        } else{
+          // nuevo contacto
+          const usuarioNuevo = {
+            telefono: message.from
+          }
+          console.log('contacto no existe');
+          axios.post(`${apiDev}/nuevoContacto`, usuarioNuevo).then(data =>{
+            console.log(data.data);            
+          })
+          //send welcome message
+          const registro = `Hola,
+Gracias por contactor Whatsy Panama, serias tan amable de decirnos tu nombre para registrarte en nuestra base de datos de promociones? escribe tu nombre ry apellido separado por una coma. Ejemplo: Fulano, Arias.`
+         //client.sendText(message.from, registro)           
+        }
       }
-      
-    }
+    });
+
+    // if (message.body === 'A') {
+    //   for (let i = 0; i < contacts.length; i++) {
+    //     const item = contacts[i].number + '@c.us';
+    //     console.log(item);
+    //     client.sendText(item,'hello');
+    //   }
+
+    // }
   });
 }
 
 //crear un nuevo contacto
 app.post('/nuevoContacto', (req, res)=>{
-  const nuevoContacto = req.body
+  const nuevoContacto = req.body;
+  const categoria = nuevoContacto.categorias; 
+  const frecuencia = nuevoContacto.frecuencia;  
+  const bienvenida = 
+  `Hola ${nuevoContacto.nombre},
+Que bueno que te animaste a ser parte de *Whatsy Panamá*. Te subcribiste a la(s) categoria(s) *${categoria}* y recibirás promociones *${frecuencia}*. Además te dejamos nuestra guia:
+- Para añadir o modificar categorias, envía la palabra *ajustes*  
+    \n- Para ver todas las promos, envía la palabra *promos*
+    \n- Si tienes alguna duda o consulta, envía la palabra *ayuda*
+    \n- Cuéntanos saber tus sugerencias, envía la palabra *opinar*
+    \n- Para ver esta information de nuevo, envía un chat con la palabra *info*`
   console.log(nuevoContacto);    
+  console.log(bienvenida);
   const crearContacto = new Contacto(nuevoContacto);
-  crearContacto.save((err, crearContacto)=>{
+  crearContacto.save((err, clienteNuevo)=>{
     if(res.status == 400) {
       res.send({ mensaje: "error en el post", res: status, err });
     } else {
-      res.send({ mensaje: "Contacto guardado con exito", res: crearContacto, err });
+      res.send({ mensaje: "Contacto guardado con exito", res: clienteNuevo, err });
+
+      const telefono = `507${clienteNuevo.telefono}@c.us`
+       whatsaap.sendText(telefono,bienvenida);   
     }
   } )
 })
@@ -93,7 +211,7 @@ app.get("/contactos", (req, res) => {
     if(res.status == 400) {
       res.send({ mensaje: "error en el get", res: status, err });
     } else {
-      res.send({ mensaje: "peticion existosa", datos: contactos });
+      res.send({ mensaje: "peticion existosa", datos: contactos });    
       // for (let i = 0; i < contactos.length; i++) {
       //   const element = contactos[i].nombre;
       //   console.log('soy ' + element);
@@ -170,17 +288,24 @@ app.put('/tarea/:id', (req, res)=>{
           console.log(datos); 
       }).then(()=>{
         if(tarea.estado == "enviado"){
-          axios.get('https://whatnotif.herokuapp.com/contactos').then(data =>{
-            const contactos = data.data.datos;
-            for (let i = 0; i < contactos.length; i++) {
-              const cliente = contactos[i];  
-              const telefono = `507${cliente.telefono}@c.us`
-            const mensaje = `Hola ${cliente.nombre},\n${tarea.mensaje} a tu numero ${cliente.telefono} para la campaña de whatsapp Marketing.\nAtt: Raynier 👋`          
-              console.log(contactos);
-              whatsaap.sendText(telefono,mensaje); 
-              }
-            
-          })
+          axios.get(`${apiDev}/contactos`).then( data => {     
+            const contactos = data.data.datos;  
+            console.log(contactos);
+              
+            for (let contacto of contactos ) {
+              console.log(contacto.categorias);      
+              const categoriaExiste = RegExp(tarea.categoria, 'i').test(contacto.categorias);
+               if (categoriaExiste){
+                console.log(contacto.nombre + ' incluye la caterogia '+ tarea.categoria ); 
+                 const telefono = `507${contacto.telefono}@c.us`
+                const mensaje = `Hola ${contacto.nombre},\n${tarea.mensaje}.\nAtt: Raynier 👋`;
+                console.log(mensaje);
+                console.log(telefono);
+                //whatsaap.sendText(telefono,mensaje);                 
+              } 
+              
+            }
+          });      
         } 
       })
 .catch(err => res.status(400).send(err));
@@ -277,5 +402,6 @@ app.post("/api/v1/order", (req, res) => {
             }
           });
         });  
+       // sayHello();
 
 module.exports = {app, port}

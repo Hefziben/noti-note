@@ -1,17 +1,3 @@
-2019/11/27-14:29:38.893 18cc Reusing MANIFEST leveldb/MANIFEST-000001
-2019/11/27-14:29:38.897 18cc Recovering log #30
-2019/11/27-14:29:38.898 18cc Level-0 table #32: started
-2019/11/27-14:29:38.913 18cc Level-0 table #32: 14598 bytes OK
-2019/11/27-14:29:38.918 18cc Recovering log #32
-2019/11/27-14:29:38.923 18cc Reusing old log leveldb/000032.log 
-2019/11/27-14:29:38.928 18cc Delete type=0 #30
-2019/11/27-14:29:38.928 18cc Delete type=2 #34
-2019/11/27-14:29:38.929 4658 Compacting 4@0 + 1@1 files
-2019/11/27-14:29:38.961 4658 Generated table #33@0: 23 keys, 3170 bytes
-2019/11/27-14:29:38.961 4658 Compacted 4@0 + 1@1 files => 3170 bytes
-2019/11/27-14:29:38.966 4658 compacted to: files[ 0 1 1 0 0 0 0 ]
-2019/11/27-14:29:38.969 4658 Delete type=2 #21
-2019/11/27-14:29:38.972 4658 Delete type=2 #24
-2019/11/27-14:29:38.973 4658 Delete type=2 #27
-2019/11/27-14:29:38.974 4658 Delete type=2 #29
-2019/11/27-14:29:38.974 4658 Delete type=2 #32
+2019/11/27-14:29:46.110 1e98 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/11/27-14:29:46.111 1e98 Recovering log #32
+2019/11/27-14:29:46.113 1e98 Reusing old log leveldb/000032.log 

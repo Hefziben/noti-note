@@ -1,3 +1,5 @@
-2019/11/27-14:29:46.110 1e98 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/11/27-14:29:46.111 1e98 Recovering log #32
-2019/11/27-14:29:46.113 1e98 Reusing old log leveldb/000032.log 
+2019/11/27-15:32:03.125 dfc Reusing MANIFEST leveldb/MANIFEST-000001
+2019/11/27-15:32:03.126 dfc Recovering log #32
+2019/11/27-15:32:03.128 dfc Level-0 table #35: started
+2019/11/27-15:32:03.136 dfc Level-0 table #35: 23702 bytes OK
+2019/11/27-15:32:03.139 dfc Delete type=0 #32

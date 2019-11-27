@@ -260,7 +260,7 @@ app.post('/message', (req, res)=>{
       res.send({ mensaje: "Message send sucess", res: newMessage });
       const phone = `507${newMessage.phone}@c.us`;
       const message = newMessage.message;
-      whatsaap.sendText(phone, message)
+      whatsaap.sendText(phone, message);
     }
   
 })

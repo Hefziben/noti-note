@@ -1,3 +1,14 @@
-2019/11/10-21:56:49.353 56ec Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2019/11/10-21:56:49.353 56ec Recovering log #19
-2019/11/10-21:56:49.389 56ec Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000019.log 
+2019/11/27-08:59:26.536 3384 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\whatserver\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2019/11/27-08:59:26.537 3384 Recovering log #76
+2019/11/27-08:59:26.855 3384 Reusing old log C:\Users\hefzi\Documents\apps\heroku\whatserver\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000076.log 
+2019/11/27-09:00:04.506 3cd4 Level-0 table #82: started
+2019/11/27-09:00:04.578 3cd4 Level-0 table #82: 1236016 bytes OK
+2019/11/27-09:00:04.587 3cd4 Delete type=0 #76
+2019/11/27-09:03:19.607 3cd4 Compacting 1@1 + 2@2 files
+2019/11/27-09:03:19.798 3cd4 Generated table #83@1: 39695 keys, 2234495 bytes
+2019/11/27-09:03:19.928 3cd4 Generated table #84@1: 24385 keys, 1222929 bytes
+2019/11/27-09:03:19.929 3cd4 Compacted 1@1 + 2@2 files => 3457424 bytes
+2019/11/27-09:03:19.934 3cd4 compacted to: files[ 0 0 2 0 0 0 0 ]
+2019/11/27-09:03:19.934 3cd4 Delete type=2 #78
+2019/11/27-09:03:19.935 3cd4 Delete type=2 #79
+2019/11/27-09:03:19.935 3cd4 Delete type=2 #82

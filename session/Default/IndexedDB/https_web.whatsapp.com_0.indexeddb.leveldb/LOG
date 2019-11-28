@@ -1,3 +1,3 @@
-2019/11/27-17:49:26.119 394 Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2019/11/27-17:49:26.120 394 Recovering log #85
-2019/11/27-17:49:26.324 394 Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000085.log 
+2019/11/27-18:01:33.356 141c Reusing MANIFEST C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2019/11/27-18:01:33.356 141c Recovering log #85
+2019/11/27-18:01:33.505 141c Reusing old log C:\Users\hefzi\Documents\apps\heroku\backend-server\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000085.log 

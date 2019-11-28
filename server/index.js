@@ -250,20 +250,6 @@ app.put('/contacto/:id', (req, res)=>{
 
 // **** Crear tareas ***//
 
-//crear tarea con mensaje
-app.post('/message', (req, res)=>{
-  const newMessage = req.body
-  console.log(newMessage); 
-    if(res.status == 400) {
-      res.send({ mensaje: "error en el post", res: status });
-    } else {
-      res.send({ mensaje: "Message send sucess", res: newMessage });
-      const phone = `507${newMessage.phone}@c.us`;
-      const message = newMessage.message;
-      whatsaap.sendText(phone, message);
-    }
-  
-})
 
 //crear tarea con mensaje
 app.post('/nuevaTarea', (req, res)=>{

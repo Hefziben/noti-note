@@ -95,7 +95,10 @@ function start(client) {
       for (let contacto of contactos) {
         if (message.from == `507${contacto.telefono}@c.us`) {
           const usuario = contacto;
-          //console.log(usuario);
+          console.log(usuario.nombre);
+          console.log(usuario.categorias);
+          
+          console.log(usuario);
           const automotriz = RegExp('au', 'i').test(message.body);
           const cursos = RegExp('cu', 'i').test(message.body);
           const restaurantes= RegExp('re', 'i').test(message.body);
@@ -149,19 +152,36 @@ function start(client) {
           })
           
           return
-        } else{
+        } else {
           // nuevo contacto
+          console.log(message.body);
+          
+          const verify = new RegExp('#').test(message.body);
+          if(verify){
+            console.log(verify);
+            
+            const identidad = message.body.split(',');
+            console.log(identidad);
+            return
+            
+          } else{
+            console.log(verify);
+          }
           const usuarioNuevo = {
+            nombre:"fulano?",
+            apellido:'detal',
+            categorias:['vacia'],
             telefono: message.from
           }
           console.log('contacto no existe');
-          axios.post(`${apiDev}/nuevoContacto`, usuarioNuevo).then(data =>{
-            console.log(data.data);            
-          })
+          // axios.post(`${apiDev}/nuevoContacto`, usuarioNuevo).then(data =>{
+          //   console.log(data.data);            
+          // })
           //send welcome message
           const registro = `Hola,
-Gracias por contactor Whatsy Panama, serias tan amable de decirnos tu nombre para registrarte en nuestra base de datos de promociones? escribe tu nombre ry apellido separado por una coma. Ejemplo: Fulano, Arias.`
-         //client.sendText(message.from, registro)           
+Gracias por contactor Whatsy Panama, serias tan amable de decirnos tu nombre para registrarte en nuestra base de datos de promociones? escribe el signo de #, seguido de tu nombre y apellido separado por una coma con el. Ejemplo: $Fulano, Arias`
+         client.sendText(message.from, registro) 
+         return          
         }
       }
     });
@@ -250,6 +270,22 @@ app.put('/contacto/:id', (req, res)=>{
 
 // **** Crear tareas ***//
 
+//crear tarea con mensaje
+app.post('/message', (req, res)=>{
+  const nuevaTarea = req.body
+  console.log(nuevaTarea);    
+  const crearTarea = new Tarea(nuevaTarea);
+  crearTarea.save((err, crearTarea)=>{
+    if(res.status == 400) {
+      res.send({ mensaje: "error en el post", res: status, err });
+    } else {
+      res.send({ mensaje: "Tarea guardado con exito", res: crearTarea, err });
+      const phone = `507${crearTarea.phone}@c.us`
+      const message = crearTarea.message;
+      whatsaap.sendText(phone, message)
+    }
+  } )
+})
 
 //crear tarea con mensaje
 app.post('/nuevaTarea', (req, res)=>{

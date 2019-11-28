@@ -1,5 +1,5 @@
 const {app, port} = require("./server/index");
-require("./database");
+//require("./database");
 
 
 //start the server
